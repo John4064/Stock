@@ -1,4 +1,4 @@
 import Data
 if __name__ == "__main__":
-    dan = Data.Market()
+    dan = Data.importData()
     print(1)
