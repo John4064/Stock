@@ -1,5 +1,7 @@
 import Data
-import tkinter
+import tkinter as tk
+
+
 #This Checks to see the greatest gain from the opening of the day to the closing
 #Returns a list of indexs of the specified days
 def bestDay(stock):
@@ -31,10 +33,38 @@ def greatestGain(stocks):
         for g in range(len(stocks[x]["high"])):
             if(stocks[x]["high"][g]>25):
                 print(stocks[x]["high"][g])
+def damn():
+    print("DICK WAD")
+    return
 if __name__ == "__main__":
-    gui = tkinter.Tk()
+    gui = tk.Tk()
     gui.geometry("800x600")
-    frame
+    gui.resizable(width=False, height=False)
+    frame = tk.Frame(gui, bg ="blue")
+    frame.pack()
+    bottomframe = tk.Frame(gui)
+    bottomframe.pack(side=tk.BOTTOM)
+    leftFrame = tk.Frame(gui)
+    leftFrame.pack(side=tk.LEFT)
+    rightFrame = tk.Frame(gui)
+    rightFrame.pack(side=tk.RIGHT)
 
+    button = tk.Button(frame,text = "QUIT", bg = "cyan",fg ="gray",command=quit,bd = 6)
+    button.pack(side=tk.LEFT)
+    button1 = tk.Button(bottomframe, text="DAN", bg="cyan", fg="gray", command=quit, bd=6)
+    button1.pack(side=tk.LEFT)
+
+
+
+
+    w = tk.Menubutton(leftFrame,text="DICK",relief = tk.RAISED, bitmap="@quit.xbm",bg="cyan")
+    w.menu = tk.Menu(w,tearoff = 0)
+    w.grid()
+
+    dan = tk.IntVar()
+    ketch= tk.IntVar()
+    w.menu.add_checkbutton(label="dan", variable=dan)
+    w.menu.add_checkbutton(label="ketch", variable=ketch,command=quit)
+    w.pack()
     #Execution of GUI
     gui.mainloop()
