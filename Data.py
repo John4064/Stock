@@ -1,3 +1,23 @@
+import os
+
+def importAll():
+    #Save the stock file into stocks.
+    #having the ticker : stockfile
+    stocks = {}
+    Path = "Stocks/"
+    name = ""
+    stock = {}
+    files = os.listdir(Path)
+    for i in files:
+        if i.endswith("us.txt") and i.startswith("f"):
+            with open(Path + i, 'r') as f:
+                name = i[:-7]
+                # for line in f:
+                # Here you can check (with regex, if, or whatever if the keyword is in the document.)
+                # print(Path)
+                importData(Path+i)
+                stocks[name] = stock
+    return stocks
 def importData(sName):
     #Come Back To this in order to read all text files at once
     #test ones BAC, HL, NOK
@@ -30,6 +50,8 @@ def importData(sName):
     tupL = tuple(lowL)
     tupC = tuple(closeL)
     tupV = tuple(volumeL)
-    stock = {"name": "bac", "dates": tuple(dates), "open":tuple(openL),
+    #Saves the tiker as name in the stock
+    stock = {"name": sName[:-7], "dates": tuple(dates), "open":tuple(openL),
               "high":tuple(highL), "low":tuple(lowL), "close":tuple(closeL), "volume":tuple(volumeL)}
+
     return stock

@@ -1,4 +1,5 @@
 import Data
+import tkinter
 #This Checks to see the greatest gain from the opening of the day to the closing
 #Returns a list of indexs of the specified days
 def bestDay(stock):
@@ -24,21 +25,6 @@ def bestOff(stock):
             ind = x
             max = stock["open"][x]-stock["close"][x-1]
     return ind
-def volatility(stock):
-    # This checks out volatile the stock is during trading day
-    # First version we check which day has most volaitly
-    # second version we check how often the stock flucuates +-5% during a day of trading
-    ind = 0
-    max = 0
-
-    #for x in range(len(stock)):
-     #   if(abs(stock["high"][x]-stock["low"][x])>max):
-      #      ind = x
-       #     max = abs(stock["high"][x]-stock["low"][x])
-    return ind
-def volaitility2(stocks):
-    #this could do the ranking of the volaitility of all the stocks
-    num = 0.0
     return num
 def greatestGain(stocks):
     for x in range(len(stocks)):
@@ -46,11 +32,9 @@ def greatestGain(stocks):
             if(stocks[x]["high"][g]>25):
                 print(stocks[x]["high"][g])
 if __name__ == "__main__":
-    bac = Data.importData("bac.us.txt")
-    hl = Data.importData("hl.us.txt")
-    nok = Data.importData("nok.us.txt")
-    stocks = {"name":"bac", ""}
-    #greatestGain(stocks)
-    #I think a dictionary would be thhe best method for storing stocks
-    #this way u can easily search by ticker rather than index
-    #thus resulting in a faster searchup time for these
+    gui = tkinter.Tk()
+    gui.geometry("800x600")
+    frame
+
+    #Execution of GUI
+    gui.mainloop()
