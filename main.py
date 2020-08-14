@@ -1,6 +1,7 @@
 import Data
 import tkinter as tk
-import panda
+from tkinter.ttk import Progressbar
+#import panda
 
 #This Checks to see the greatest gain from the opening of the day to the closing
 #Returns a list of indexs of the specified days
@@ -27,19 +28,35 @@ def bestOff(stock):
             ind = x
             max = stock["open"][x]-stock["close"][x-1]
     return ind
-    return num
 def greatestGain(stocks):
     for x in range(len(stocks)):
         for g in range(len(stocks[x]["high"])):
             if(stocks[x]["high"][g]>25):
                 print(stocks[x]["high"][g])
-def damn():
-    tkMessageBox.showinfo("Hello Python", "Hello World")
-    return
+def hello():
+    print("hello!")
 if __name__ == "__main__":
-    gui = tk.Tk()
-    gui.geometry("800x600")
-    gui.resizable(width=False, height=False)
-
+    root = tk.Tk()
+    root.geometry("800x600")
+    root.resizable(width=False, height=False)
+    frame = tk.Frame(root, bg='#80c1ff', bd=5)
+    frame.place(relx=.5, rely=0.1, relwidth=0.75, relheight=.6, anchor='n')
+    entry = tk.Entry(frame, font=40)
+    entry.place(relwidth=0.65, relheight=.3,relx=.2,rely=.5)
+    menu = tk.Menu(root)
+    new_item = tk.Menu(menu)
+    new_item.add_command(label='Import All',command=Data.importAll)
+    menu.add_cascade(label='Import',menu=new_item)
+    root.config(menu=menu)
+    #canvas = tk.Canvas(root,height = 600, width = 400, bg = "cyan")
     #Execution of GUI
-    gui.mainloop()
+    root.mainloop()
+
+
+    #THIS IS THE PROGRESS BAR IDEA
+   # style = tk.ttk.Style()
+    #style.theme_use('default')
+    #style.configure("black.Horizontal.TPorgressbar", background = 'black')
+    #bar = Progressbar(window, length=200,style='black.Horizontal.TProgressbar')
+   # bar['value'] = 70
+    #bar.pack()
