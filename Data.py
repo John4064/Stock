@@ -1,5 +1,5 @@
 import os
-
+import main
 def importAll():
     #Save the stock file into stocks.
     #having the ticker : stockfile
@@ -21,7 +21,10 @@ def importAll():
 def importData(sName):
     #Come Back To this in order to read all text files at once
     #test ones BAC, HL, NOK
-    inFile = open(sName, 'r')
+    try:
+        inFile = open(sName, 'r')
+    except:
+        print("File name Error")
     dates = []
     openL = []
     highL = []
@@ -51,7 +54,7 @@ def importData(sName):
     tupC = tuple(closeL)
     tupV = tuple(volumeL)
     #Saves the tiker as name in the stock
-    stock = {"name": sName[:-7], "dates": tuple(dates), "open":tuple(openL),
+    stock = {"name": sName[7:-7], "dates": tuple(dates), "open":tuple(openL),
               "high":tuple(highL), "low":tuple(lowL), "close":tuple(closeL), "volume":tuple(volumeL)}
-
+    print(sName[7:-7])
     return stock
