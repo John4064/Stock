@@ -24,8 +24,39 @@ def bestOff(stock):
             ind = x
             max = stock["open"][x]-stock["close"][x-1]
     return ind
+#This calculates through all of the stocks, Test Function not real
 def greatestGain(stocks):
     for x in range(len(stocks)):
         for g in range(len(stocks[x]["high"])):
             if(stocks[x]["high"][g]>25):
                 print(stocks[x]["high"][g])
+#In Progress not completed
+def beta(stock,year):
+    #We Need to calculate correlation and deviation
+    #Using a one year Correlation to start
+    #218 for the last year
+    sum=0
+    for x in range(len(stock['dates'])):
+        if(year in stock['dates'][x]):
+            sum= sum+1
+    print(sum)
+    return
+
+#This calculates the standard deviation between the close and adj close
+def deviation(stock):
+    # we add up all the percentages then divide by the length
+    per = 0
+    sum = 0
+    for x in range(len(stock["close"])):
+        #print(stock["close"][x]-stock["adj"][x])
+        per = ((stock["close"][x]-stock["adj"][x]) / stock["close"][x])*100
+        print(per)
+        sum =per+sum
+    sum = sum/len(stock["close"])
+    return sum
+
+def avgV(stock):
+    sum=0
+    for x in range(len(stock['dates'])):
+        sum = sum+stock['volume'][x]
+    return (sum/len(stock['volume']))
