@@ -50,7 +50,7 @@ def deviation(stock):
     for x in range(len(stock["close"])):
         #print(stock["close"][x]-stock["adj"][x])
         per = ((stock["close"][x]-stock["adj"][x]) / stock["close"][x])*100
-        print(per)
+        #print(per)
         sum =per+sum
     sum = sum/len(stock["close"])
     return sum
