@@ -30,8 +30,8 @@ class gui():
         self.bestO.place(relwidth=.15, relheight=.1, relx=0, rely=.9)
         # QUIT BUTTON
 
-        self.button2 = tk.Button(self.frame, bg='#2980b9',fg='yellow',text='QUIT',font=40,command=quit)
-        self.button2.place(relwidth=.15, relheight=.1, relx=.8, rely=0)
+        #self.button2 = tk.Button(self.frame, bg='#2980b9',fg='yellow',text='QUIT',font=40,command=quit)
+        #self.button2.place(relwidth=.15, relheight=.1, relx=.8, rely=0)
         # The Import Button
         self.Ibutton = tk.Button(self.frame, bd=5, bg='#2980b9', text='IMPORT', fg='yellow', font=40,
                                 command=lambda: self.imp())
@@ -109,7 +109,9 @@ class gui():
         self.root.mainloop()
 
 if __name__ == "__main__":
-    dan = gui()
+    #dan = gui()
+    stocks = Data.importAll()
+    print(len(stocks))
     #stock = Data.importData('stocks/a.csv')
     #print(Calc.beta(stock,'2017'))
     #print(Calc.deviation(stock))
