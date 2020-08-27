@@ -60,3 +60,6 @@ def avgV(stock):
     for x in range(len(stock['dates'])):
         sum = sum+stock['volume'][x]
     return (sum/len(stock['volume']))
+def mergeS(stock):
+    sorted = []
+    return sorted
