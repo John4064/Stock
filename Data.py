@@ -1,5 +1,24 @@
 import os
 import main
+def fix(sName):
+    # Come Back To this in order to read all text files at once
+    # test ones BAC, HL, NOK
+    try:
+        inFile = open(sName, 'r')
+    except:
+        print("File name Error")
+    # This is just to ignore the first line of the text file
+    line = inFile.readline()
+    # This sequiantly goes through each line and splits up each statistic
+    # then adds it to a list with the designated statistic
+    # Same index will generate the same day
+    volumeL = []
+    for line in inFile:
+        line = line.strip()
+        date, start, high, low, close, adjC, volume = line.split(',')
+        volumeL.append(volume)
+    print(volumeL)
+    return
 def importAll():
     #Save the stock file into stocks.
     #having the ticker : stockfile
@@ -9,7 +28,6 @@ def importAll():
     stock = {}
     files = os.listdir(Path)
     for i in files:
-
         #Glitched since there all upper case now
         if i.endswith(".csv"):
             with open(Path + i, 'r') as f:
@@ -17,11 +35,16 @@ def importAll():
                 # for line in f:
                 # Here you can check (with regex, if, or whatever if the keyword is in the document.)
                 # print(Path)
-                print(name)
+                #print(name)
                 #if(name != 'ADP' and name != 'AEM'and name != 'AFB'):
                 #    print(name)
-                importData(Path + i)
-                stocks[name] = stock
+                try:
+                    #importData(Path + i)
+                    #stocks[name] = stock
+                    total = total+1
+                except:
+                    fix(Path+i)
+                    print(name)
 
 
     return stocks

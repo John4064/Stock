@@ -2,9 +2,6 @@ import Data
 import Calc
 import tkinter as tk
 from tkinter.ttk import Progressbar
-#import panda
-def error():
-    return
 class gui():
     def progressBar(self):
 
@@ -74,8 +71,11 @@ class gui():
     def imp(self):
         global stock
         self.field.delete(1.00, tk.END)
-        stock = Data.importData('stocks/' + self.entry.get() + '.csv')
-        self.field.insert(1.0,"IMPORT SUCCESSFUL!")
+        try:
+            stock = Data.importData('stocks/' + self.entry.get() + '.csv')
+            self.field.insert(1.0,"IMPORT SUCCESSFUL!")
+        except:
+            self.field.insert(1.0,"Unexpected Error, Contact Author.")
         return
     def __init__(self):
         self.root = tk.Tk()
@@ -110,9 +110,7 @@ class gui():
 
 if __name__ == "__main__":
     #dan = gui()
-    #stocks = Data.importAll()
+
+    stocks = Data.importAll()
     #print(len(stocks))
-    stock = Data.importData('stocks/amzn.csv')
-    print(Calc.mergeS(stock))
-    #print(Calc.beta(stock,'2017'))
-    #print(Calc.deviation(stock))
+    #stock = Data.importData('stocks/amzn.csv')
