@@ -111,6 +111,7 @@ class gui():
 if __name__ == "__main__":
     #dan = gui()
 
-    stocks = Data.importAll()
+    #stocks = Data.importAll()
+    Data.fix()
     #print(len(stocks))
     #stock = Data.importData('stocks/amzn.csv')

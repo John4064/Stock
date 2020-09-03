@@ -1,10 +1,17 @@
 import os
 import main
-def fix(sName):
+#temporary function to ereapir broken data files
+def fix():
     # Come Back To this in order to read all text files at once
     # test ones BAC, HL, NOK
+    names =[]
+    brokeFile = open("brokenstocks.txt",'r')
+    for line in brokeFile:
+        line = line.strip()
+        names.append(line)
+    sName = "stocks/" +names[0]+".csv"
     try:
-        inFile = open(sName, 'r')
+        inFile = open(sName, 'r')#w for write
     except:
         print("File name Error")
     # This is just to ignore the first line of the text file
@@ -16,8 +23,11 @@ def fix(sName):
     for line in inFile:
         line = line.strip()
         date, start, high, low, close, adjC, volume = line.split(',')
-        volumeL.append(volume)
-    print(volumeL)
+        print(high)
+        print(type(float(high)))
+        volumeL.append(0.0)
+
+    #print(volumeL)
     return
 def importAll():
     #Save the stock file into stocks.
@@ -26,6 +36,7 @@ def importAll():
     Path = "Stocks/"
     name = ""
     stock = {}
+    total= 0
     files = os.listdir(Path)
     for i in files:
         #Glitched since there all upper case now
@@ -38,13 +49,9 @@ def importAll():
                 #print(name)
                 #if(name != 'ADP' and name != 'AEM'and name != 'AFB'):
                 #    print(name)
-                try:
-                    #importData(Path + i)
-                    #stocks[name] = stock
-                    total = total+1
-                except:
-                    fix(Path+i)
-                    print(name)
+                importData(Path + i)
+                stocks[name] = stock
+
 
 
     return stocks
