@@ -57,6 +57,6 @@ def deviation(stock):
 
 def avgV(stock):
     sum=0
-    for x in range(len(stock['dates'])):
+    for x in range(len(stock['volume'])):
         sum = sum+stock['volume'][x]
     return (sum/len(stock['volume']))

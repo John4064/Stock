@@ -47,14 +47,14 @@ def importData(sName):
     #Same index will generate the same day
     for line in inFile:
         line = line.strip()
-        print(line)
+        #print(line)
         date, start, high, low, close, adjC, volume = line.split(',')
-        dates.append(date)
         #THIS IS TO CHECK IF THE DATA IS There
         if (start == ''):
             print("Ignored this day due to no trading")
         else:
             # start = open just open is a keyword in python
+            dates.append(date)
             openL.append(float(start))
             highL.append(float(high))
             lowL.append(float(low))
@@ -71,5 +71,4 @@ def importData(sName):
     #Saves the tiker as name in the stock
     stock = {"name": sName[7:-4], "dates": tuple(dates), "open":tuple(openL),
               "high":tuple(highL), "low":tuple(lowL), "close":tuple(closeL), "adj":tuple(adjCL),"volume":tuple(volumeL)}
-    #print(sName[7:-4])
     return stock
