@@ -109,9 +109,9 @@ class gui():
         self.root.mainloop()
 
 if __name__ == "__main__":
-    #dan = gui()
+    root = gui()
 
     #stocks = Data.importAll()
-    Data.fix()
+    #Data.fix()
     #print(len(stocks))
     #stock = Data.importData('stocks/amzn.csv')

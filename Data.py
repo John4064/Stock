@@ -1,34 +1,5 @@
 import os
 import main
-#temporary function to ereapir broken data files
-def fix():
-    # Come Back To this in order to read all text files at once
-    # test ones BAC, HL, NOK
-    names =[]
-    brokeFile = open("brokenstocks.txt",'r')
-    for line in brokeFile:
-        line = line.strip()
-        names.append(line)
-    sName = "stocks/" +names[0]+".csv"
-    try:
-        inFile = open(sName, 'r')#w for write
-    except:
-        print("File name Error")
-    # This is just to ignore the first line of the text file
-    line = inFile.readline()
-    # This sequiantly goes through each line and splits up each statistic
-    # then adds it to a list with the designated statistic
-    # Same index will generate the same day
-    volumeL = []
-    for line in inFile:
-        line = line.strip()
-        date, start, high, low, close, adjC, volume = line.split(',')
-        print(high)
-        print(type(float(high)))
-        volumeL.append(0.0)
-
-    #print(volumeL)
-    return
 def importAll():
     #Save the stock file into stocks.
     #having the ticker : stockfile
@@ -76,20 +47,21 @@ def importData(sName):
     #Same index will generate the same day
     for line in inFile:
         line = line.strip()
+        print(line)
         date, start, high, low, close, adjC, volume = line.split(',')
         dates.append(date)
-        #if(volume.endswith('.0')):
-            #volume = volume[:-2]
-
-        #start = open just open is a keyword in python
-
-        openL.append(float(start))
-        highL.append(float(high))
-        lowL.append(float(low))
-        closeL.append(float(close))
-        # adjC is the adjusted close
-        adjCL.append(float(adjC))
-        volumeL.append(int(volume))
+        #THIS IS TO CHECK IF THE DATA IS There
+        if (start == ''):
+            print("Ignored this day due to no trading")
+        else:
+            # start = open just open is a keyword in python
+            openL.append(float(start))
+            highL.append(float(high))
+            lowL.append(float(low))
+            closeL.append(float(close))
+            # adjC is the adjusted close
+            adjCL.append(float(adjC))
+            volumeL.append(float(volume))
 
         #This determines if the data is an integer or float
         #depending on the stock it will change due to how
