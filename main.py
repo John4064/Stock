@@ -111,7 +111,3 @@ class gui():
 if __name__ == "__main__":
     root = gui()
 
-    #stocks = Data.importAll()
-    #Data.fix()
-    #print(len(stocks))
-    #stock = Data.importData('stocks/amzn.csv')

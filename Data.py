@@ -1,5 +1,16 @@
 import os
 import main
+import pandas as pd
+
+def updatedImport(sName):
+    #This is a reeplica method of importData
+    #However this uses pandas dataframes dictionaries rather than a custom one
+    #Much more efficient
+    try:
+        stock = pd.read_csv(sName)
+    except:
+        print("File name Error")
+    return stock
 def importAll():
     #Save the stock file into stocks.
     #having the ticker : stockfile
@@ -9,9 +20,11 @@ def importAll():
     stock = {}
     total= 0
     files = os.listdir(Path)
+
     for i in files:
+        #print(i)
         #Glitched since there all upper case now
-        if i.endswith(".csv"):
+        if i.endswith(".csv") and i.startswith("D"):
             with open(Path + i, 'r') as f:
                 name = i[:-4]
                 # for line in f:
@@ -20,7 +33,7 @@ def importAll():
                 #print(name)
                 #if(name != 'ADP' and name != 'AEM'and name != 'AFB'):
                 #    print(name)
-                importData(Path + i)
+                stock =updatedImport(Path + i)
                 stocks[name] = stock
 
 
