@@ -109,5 +109,6 @@ class gui():
         self.root.mainloop()
 
 if __name__ == "__main__":
+    stock = Data.updatedImport("stocks/aa.csv")
     root = gui()
 

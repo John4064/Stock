@@ -3,3 +3,7 @@ Questions.txt
 *.xml
 *.xml
 *.iml
+*.pyc
+*.iml
+*.xml
+*.pyc

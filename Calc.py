@@ -60,3 +60,20 @@ def avgV(stock):
     for x in range(len(stock['volume'])):
         sum = sum+stock['volume'][x]
     return (sum/len(stock['volume']))
+#UPDATED FUNCTIONS FOR DATA FRAME
+def newavgV(stock):
+    sum=0
+    for g in range(len(stock.index)):
+        sum = sum+stock['Volume'][g]
+    return (sum/(len(stock.index)))
+    #need to test with unit testing but amzn it works right
+def newDeviation(stock):
+    # we add up all the percentages then divide by the length
+    per = 0
+    sum = 0
+    for x in range(len(stock.index)):
+        per = ((stock["Close"][x]-stock["Adj Close"][x]) / stock["Close"][x])*100
+
+        #print(per)
+        sum =per+sum
+    return sum/len(stock.index)
