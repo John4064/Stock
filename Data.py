@@ -64,7 +64,7 @@ def importData(sName):
         date, start, high, low, close, adjC, volume = line.split(',')
         #THIS IS TO CHECK IF THE DATA IS There
         if (start == ''):
-            print("Ignored this day due to no trading")
+            print("Ignored this day due to no trading!")
         else:
             # start = open just open is a keyword in python
             dates.append(date)
