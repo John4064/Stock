@@ -3,13 +3,12 @@ import main
 import pandas as pd
 
 def updatedImport(sName):
-    #This is a reeplica method of importData
-    #However this uses pandas dataframes dictionaries rather than a custom one
-    #Much more efficient
     try:
         stock = pd.read_csv(sName)
     except:
         print("File name Error")
+    #NEED TO FIX SNAME
+    #Check Github Change 10/24
     return stock
 def importAll():
     #Save the stock file into stocks.
@@ -24,7 +23,7 @@ def importAll():
     for i in files:
         #print(i)
         #Glitched since there all upper case now
-        if i.endswith(".csv") and i.startswith("D"):
+        if i.endswith(".csv"):
             with open(Path + i, 'r') as f:
                 name = i[:-4]
                 # for line in f:
@@ -35,6 +34,13 @@ def importAll():
                 #    print(name)
                 stock =updatedImport(Path + i)
                 stocks[name] = stock
+def test():
+    names = []
+    files = os.listdir("stocks/")
+    for x in files:
+        if x.endswith(".csv"):
+            names.append(x[:-4])
+    return names
 
 
 

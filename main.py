@@ -39,11 +39,11 @@ class gui():
         per = round(per,3)
         if(per>0):
             self.field.delete(1.00, tk.END)
-            self.field.insert(1.0, stock["name"] + " has an average deviation of\n" + str(
+            self.field.insert(1.0, stock["Name"] + " has an average deviation of\n" + str(
                 per) + "% decrease between the closing price and the adjusted closing price.")
         else:
             self.field.delete(1.00, tk.END)
-            self.field.insert(1.0, stock["name"] + " has an average deviation of\n" + str(
+            self.field.insert(1.0, stock["Name"] + " has an average deviation of\n" + str(
                 per) + "% increase between the closing price and the adjusted closing price.")
 
         return
@@ -51,28 +51,29 @@ class gui():
     def updateA(self,avg):
         avg = round(avg,2)
         self.field.delete(1.00, tk.END)
-        self.field.insert(1.0, stock["name"] + " has an average trading volume of\n"+str(avg))
+        self.field.insert(1.0, stock["Name"] + " has an average trading volume of\n"+str(avg))
 
         return
     #updates the field for GUI about best Off hours
     def updateO(self,ind):
-        num = round(stock["open"][ind]-stock["close"][ind-1],2)
+        num = round(stock["Open"][ind]-stock["Close"][ind-1],2)
         self.field.delete(1.00,tk.END)
-        self.field.insert(1.0,stock["name"]+" had its best off hours trading and \nit occured on the Night/Morning before\n"+stock["dates"][ind]+ " there was a "+str(num)+" gain.")
+        self.field.insert(1.0,stock["Name"]+" had its best off hours trading and \nit occured on the Night/Morning before\n"+stock["Date"][ind]+ " there was a "+str(num)+" gain.")
         return
 
     # updates the field for GUI about best day
     def updateG(self,ind):
-        num = round(stock["close"][ind] - stock["open"][ind],5)
+        num = round(stock["Close"][ind] - stock["Open"][ind],5)
         self.field.delete(1.00, tk.END)
-        self.field.insert(1.0,stock["name"]+" had its greatest day ever trading \nand it happened on "+stock["dates"][ind]+" there" " \n"+"was a "+str(num)+" gain.")
+        self.field.insert(1.0,stock["Name"]+" had its greatest day ever trading \nand it happened on "+stock["Dates"][ind]+" there" " \n"+"was a "+str(num)+" gain.")
         return
     #To tell if it is imported properly and sets the stock as the global stock variable
     def imp(self):
         global stock
         self.field.delete(1.00, tk.END)
         try:
-            stock = Data.importData('stocks/' + self.entry.get() + '.csv')
+            #stock = Data.importData('stocks/' + self.entry.get() + '.csv')
+            stock= Data.updatedImport('stocks/' + self.entry.get() + '.csv')
             self.field.insert(1.0,"IMPORT SUCCESSFUL!")
         except:
             self.field.insert(1.0,"Unexpected Error, Contact Author.")
@@ -110,5 +111,12 @@ class gui():
 
 if __name__ == "__main__":
     stock = Data.updatedImport("stocks/aa.csv")
-    root = gui()
+    ostock = Data.importData("stocks/aa.csv")
+    print(Calc.bestOff(ostock))
+    print(Calc.newBestOff(stock))
+
+    #names = Data.test()
+    #print(names)
+
+    #root = gui()
 
