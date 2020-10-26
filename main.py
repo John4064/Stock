@@ -3,6 +3,7 @@ import Calc
 import tkinter as tk
 from tkinter.ttk import Progressbar
 class gui():
+
     def progressBar(self):
 
         self.bar = tk.ttk.Progressbar(self.frame)
@@ -13,17 +14,17 @@ class gui():
         self.style.configure('TButton', font=('calibri', 20, 'bold'), borderwidth='4')
         # BUTTON BAR
         self.greatB = tk.Button(self.frame, bg='#2980b9', text='Greatest\n Gain', fg='yellow', font=40,
-                                command=lambda: [self.updateG(Calc.bestDay(stock))])
+                                command=lambda: [self.updateG(Calc.newBestDay(self.stock))])
         self.greatB.place(relwidth=.15, relheight=.1, relx=0, rely=.6)
 
         self.AVG = tk.Button(self.frame, text='Average\nVolume', fg='yellow', bg='#2980b9', font=40,
-                             command = lambda:[self.updateA(Calc.avgV(stock))])
+                             command = lambda:[self.updateA(Calc.newAvgV(self.stock))])
         self.AVG.place(relwidth=.15, relheight=.1, relx=0, rely=.7)
         self.cDevi = tk.Button(self.frame, bg='#2980b9', text='Closed\nDeviation', fg='yellow', font=40,
-                               command=lambda: [self.updateD(Calc.deviation(stock))])
+                               command=lambda: [self.updateD(Calc.newDeviation(self.stock))])
         self.cDevi.place(relwidth=.15, relheight=.1, relx=0, rely=.8)
         self.bestO = tk.Button(self.frame, bg='#2980b9', text='Best\nOff Day', fg='yellow', font=40,
-                               command=lambda: [self.updateO(Calc.bestOff(stock))])
+                               command=lambda: [self.updateO(Calc.newBestOff(self.stock))])
         self.bestO.place(relwidth=.15, relheight=.1, relx=0, rely=.9)
         # QUIT BUTTON
 
@@ -39,11 +40,11 @@ class gui():
         per = round(per,3)
         if(per>0):
             self.field.delete(1.00, tk.END)
-            self.field.insert(1.0, stock["Name"] + " has an average deviation of\n" + str(
+            self.field.insert(1.0, self.name + " has an average deviation of\n" + str(
                 per) + "% decrease between the closing price and the adjusted closing price.")
         else:
             self.field.delete(1.00, tk.END)
-            self.field.insert(1.0, stock["Name"] + " has an average deviation of\n" + str(
+            self.field.insert(1.0, self.name + " has an average deviation of\n" + str(
                 per) + "% increase between the closing price and the adjusted closing price.")
 
         return
@@ -51,34 +52,36 @@ class gui():
     def updateA(self,avg):
         avg = round(avg,2)
         self.field.delete(1.00, tk.END)
-        self.field.insert(1.0, stock["Name"] + " has an average trading volume of\n"+str(avg))
+        self.field.insert(1.0, self.name + " has an average trading volume of\n"+str(avg))
 
         return
     #updates the field for GUI about best Off hours
     def updateO(self,ind):
-        num = round(stock["Open"][ind]-stock["Close"][ind-1],2)
+        num = round(self.stock["Open"][ind]-self.stock["Close"][ind-1],2)
         self.field.delete(1.00,tk.END)
-        self.field.insert(1.0,stock["Name"]+" had its best off hours trading and \nit occured on the Night/Morning before\n"+stock["Date"][ind]+ " there was a "+str(num)+" gain.")
+        self.field.insert(1.0,self.name+" had its best off hours trading and \nit occured on the Night/Morning before\n"+self.stock["Date"][ind]+ " there was a "+str(num)+" gain.")
         return
 
     # updates the field for GUI about best day
     def updateG(self,ind):
-        num = round(stock["Close"][ind] - stock["Open"][ind],5)
+        num = round(self.stock["Close"][ind] - self.stock["Open"][ind],5)
         self.field.delete(1.00, tk.END)
-        self.field.insert(1.0,stock["Name"]+" had its greatest day ever trading \nand it happened on "+stock["Dates"][ind]+" there" " \n"+"was a "+str(num)+" gain.")
+        self.field.insert(1.0,self.name+" had its greatest day ever trading \nand it happened on "+self.stock["Date"][ind]+" there" " \n"+"was a "+str(num)+" gain.")
         return
     #To tell if it is imported properly and sets the stock as the global stock variable
     def imp(self):
-        global stock
         self.field.delete(1.00, tk.END)
         try:
             #stock = Data.importData('stocks/' + self.entry.get() + '.csv')
-            stock= Data.updatedImport('stocks/' + self.entry.get() + '.csv')
+            self.name = self.entry.get()
+            self.stock= Data.updatedImport('stocks/' + self.entry.get() + '.csv')
             self.field.insert(1.0,"IMPORT SUCCESSFUL!")
         except:
             self.field.insert(1.0,"Unexpected Error, Contact Author.")
         return
     def __init__(self):
+        self.name = ''
+        name = ''
         self.root = tk.Tk()
         self.root.geometry("800x600")
         self.root.resizable(width=False, height=False)
@@ -110,13 +113,5 @@ class gui():
         self.root.mainloop()
 
 if __name__ == "__main__":
-    stock = Data.updatedImport("stocks/aa.csv")
-    ostock = Data.importData("stocks/aa.csv")
-    print(Calc.bestOff(ostock))
-    print(Calc.newBestOff(stock))
-
-    #names = Data.test()
-    #print(names)
-
-    #root = gui()
+    root = gui()
 

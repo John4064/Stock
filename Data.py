@@ -41,13 +41,11 @@ def test():
         if x.endswith(".csv"):
             names.append(x[:-4])
     return names
-
-
-
     return stocks
 def importData(sName):
-    #Come Back To this in order to read all text files at once
-    #test ones BAC, HL, NOK
+    #This is an outdated import data function I used when I saved it with tuples and dictionaries
+    #Now Obselete
+    #Kept just to display
     try:
         inFile = open(sName, 'r')
     except:
@@ -66,7 +64,6 @@ def importData(sName):
     #Same index will generate the same day
     for line in inFile:
         line = line.strip()
-        #print(line)
         date, start, high, low, close, adjC, volume = line.split(',')
         #THIS IS TO CHECK IF THE DATA IS There
         if (start == ''):
